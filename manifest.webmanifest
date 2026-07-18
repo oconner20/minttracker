@@ -1,0 +1,19 @@
+{
+  "name": "MintTracker – รายรับรายจ่าย",
+  "short_name": "MintTracker",
+  "description": "ระบบบันทึกรายรับ-รายจ่ายส่วนบุคคล ใช้งานออฟไลน์ได้",
+  "lang": "th",
+  "dir": "ltr",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ebebeb",
+  "theme_color": "#14b8a6",
+  "icons": [
+    { "src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

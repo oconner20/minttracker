@@ -1,0 +1,14 @@
+{
+  "name": "minttracker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ระบบบันทึกรายรับ-รายจ่าย (PWA, offline-first)",
+  "scripts": {
+    "build:css": "tailwindcss -c tailwind.config.js -i src/tailwind-input.css -o css/tailwind.css --minify",
+    "watch:css": "tailwindcss -c tailwind.config.js -i src/tailwind-input.css -o css/tailwind.css --watch",
+    "start": "python -m http.server 8000"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  }
+}

@@ -203,7 +203,9 @@
                                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                     <span class="text-slate-400 dark:text-slate-500 font-medium">฿</span>
                                 </div>
-                                <input type="number" id="amount" placeholder="0.00" step="0.01" min="0.01" required
+                                <!-- inputmode="decimal" บังคับให้มือถือ (โดยเฉพาะ iOS) ขึ้นแป้นตัวเลขล้วน
+                                     ถ้ามีแค่ type="number" iOS จะยังเด้งคีย์บอร์ดตัวอักษรขึ้นมาด้วย -->
+                                <input type="number" inputmode="decimal" id="amount" placeholder="0.00" step="0.01" min="0.01" required
                                     class="w-full pl-8 pr-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:border-brand-500 dark:focus:border-brand-400 focus:bg-white dark:focus:bg-slate-800 text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-brand-200 dark:focus:ring-brand-500/30 outline-none transition-all placeholder:text-slate-400 dark:placeholder:text-slate-500 font-bold text-lg">
                             </div>
                         </div>
@@ -514,7 +516,7 @@
                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                     <span class="text-slate-400 dark:text-slate-500 font-medium">฿</span>
                 </div>
-                <input type="number" id="budgetInput" placeholder="0.00" step="100" min="0" class="w-full pl-8 pr-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:border-brand-500 dark:focus:border-brand-400 text-slate-800 dark:text-slate-100 outline-none transition-all text-lg font-bold">
+                <input type="number" inputmode="decimal" id="budgetInput" placeholder="0.00" step="100" min="0" class="w-full pl-8 pr-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:border-brand-500 dark:focus:border-brand-400 text-slate-800 dark:text-slate-100 outline-none transition-all text-lg font-bold">
             </div>
             <div class="flex gap-3">
                 <button onclick="closeBudgetModal()" class="flex-1 py-3 rounded-xl font-bold text-slate-500 dark:text-slate-300 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors shadow-none">ยกเลิก</button>

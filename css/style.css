@@ -43,3 +43,17 @@ html.dark input[type="date"]::-webkit-calendar-picker-indicator {
     filter: invert(1) !important;
     opacity: 0.8 !important;
 }
+
+/* iOS/Safari จัดข้อความใน input[type="date"] ไว้กึ่งกลางโดยปริยาย
+   ทำให้ไม่ตรงแนวกับช่องกรอกอื่นที่ชิดซ้ายทั้งหมด
+   ::-webkit-date-and-time-value คือส่วนที่เก็บตัวข้อความวันที่บน WebKit
+   (บนเดสก์ท็อป Chrome ใช้ ::-webkit-datetime-edit จึงไม่กระทบของเดิม) */
+input[type="date"]::-webkit-date-and-time-value {
+    text-align: left;
+}
+/* เผื่อเบราว์เซอร์ที่อ่านค่าจาก input โดยตรง
+   หมายเหตุ: ตั้งใจไม่ใส่ -webkit-appearance: none เพราะไม่จำเป็นต่อการแก้ปัญหานี้
+   และอาจไปเปลี่ยนการวาดคอนโทรลปฏิทินของเบราว์เซอร์บนเดสก์ท็อป */
+input[type="date"] {
+    text-align: left;
+}

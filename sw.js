@@ -1,6 +1,6 @@
 // Service Worker สำหรับ MintTracker (PWA / offline)
 // เพิ่มเลขเวอร์ชันนี้ทุกครั้งที่แก้ไฟล์ asset เพื่อบังคับให้ผู้ใช้ได้ของใหม่
-const CACHE = 'minttracker-v11';
+const CACHE = 'minttracker-v14';
 
 // App shell + asset ทั้งหมด (ไม่พึ่ง CDN อีกต่อไป)
 const PRECACHE = [
@@ -38,7 +38,12 @@ self.addEventListener('install', (e) => {
   // ตั้งใจไม่เรียก skipWaiting() ที่นี่ — ปล่อยให้ SW ตัวใหม่ "รอ" ไว้ก่อน
   // มิฉะนั้นหน้าที่เปิดอยู่จะรัน JS เก่าในหน่วยความจำปนกับ asset ใหม่จากแคช
   // การอัปเดตจะเกิดก็ต่อเมื่อผู้ใช้กดปุ่ม "อัปเดต" เอง (ดู js/sw-register.js)
-  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(PRECACHE)));
+  // ต้องใส่ cache: 'reload' เพื่อบังคับดึงไฟล์จากเครือข่ายจริง
+  // ถ้าไม่ใส่ addAll จะอ่านผ่าน HTTP cache ของเบราว์เซอร์ ซึ่งอาจคืนไฟล์เก่ามาให้
+  // ผลคือแคชเวอร์ชันใหม่กลับบรรจุไฟล์เก่า ผู้ใช้จึงไม่ได้ของใหม่แม้จะ bump เลขเวอร์ชันแล้ว
+  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(
+    PRECACHE.map((u) => new Request(u, { cache: 'reload' }))
+  )));
 });
 
 // หน้าเว็บส่งสัญญาณมาเมื่อผู้ใช้กดยืนยันอัปเดต

@@ -588,16 +588,18 @@ function updateValues() {
             }
             
             const bgIconClass = t.type==='transfer' ? 'bg-gold-lightest ' : (isExp?'bg-cat-brick-bg ':'bg-green-light ');
+            // แถบสีขอบซ้าย บอกประเภทรายการตั้งแต่แรกเห็น โดยไม่ต้องอ่านตัวเลข
+            const accentClass = t.type==='transfer' ? 'border-transfer' : (isExp ? 'border-expense' : 'border-income');
 
             list.insertAdjacentHTML('beforeend', `
-                <li onclick="toggleTxActions(${t.id})" data-open="false" class="relative bg-white p-4 rounded-card mb-3 cursor-pointer select-none shadow-card">
+                <li onclick="toggleTxActions(${t.id})" data-open="false" class="relative bg-white p-4 pl-3 rounded-card mb-3 cursor-pointer select-none shadow-card border-l-4 ${accentClass}">
                     <div class="flex items-center gap-3">
                         <div class="w-12 h-12 rounded-card ${bgIconClass} flex items-center justify-center flex-shrink-0">${iconHtml}</div>
                         <div class="flex flex-col min-w-0 flex-1">
                             <p class="font-bold text-ink truncate text-base leading-snug">${escapeHTML(t.text)}</p>
-                            <div class="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-ink-soft mt-1">
-                                <span class="flex items-center bg-ceramic px-2 py-0.5 rounded-xs min-w-0 max-w-full"><i class="fa-solid fa-wallet opacity-60 mr-1.5"></i>${wName}</span>
-                                <span class="whitespace-nowrap">${formatDateDisplay(t.date)}</span>
+                            <div class="flex items-center gap-2 text-xs text-ink-soft mt-1 min-w-0">
+                                <span class="flex items-center bg-ceramic px-2 py-0.5 rounded-xs min-w-0 shrink"><i class="fa-solid fa-wallet opacity-60 mr-1.5 shrink-0"></i>${wName}</span>
+                                <span class="whitespace-nowrap shrink-0">${formatDateDisplay(t.date)}</span>
                             </div>
                             ${dHtml}
                         </div>

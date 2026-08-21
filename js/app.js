@@ -387,7 +387,7 @@ document.querySelectorAll('input[name="type"]').forEach(radio => {
     radio.addEventListener('change', (e) => {
         const type = e.target.value;
         if (type === 'transfer') {
-            walletSelectLabel.innerText = "จากเป๋าตัง (ต้นทาง)";
+            walletSelectLabel.innerText = "จากเป๋าตัง";
             toWalletGroup.classList.remove('hidden');
             categoryGroup.classList.add('hidden');
             if (!transferToWalletId && wallets.length > 1) {
@@ -395,7 +395,7 @@ document.querySelectorAll('input[name="type"]').forEach(radio => {
                 walletSelectionTarget = 'to'; selectWalletForForm(targetWallet.id, targetWallet.name);
             }
         } else {
-            walletSelectLabel.innerText = type === 'income' ? "เป๋าตัง (รับเงินเข้าที่ไหน?)" : "เป๋าตัง (ใช้เงินจากที่ไหน?)";
+            walletSelectLabel.innerText = type === 'income' ? "เป๋าตัง" : "เป๋าตัง";
             toWalletGroup.classList.add('hidden');
             categoryGroup.classList.remove('hidden');
             populateCategoryModal(type);

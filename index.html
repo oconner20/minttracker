@@ -60,7 +60,7 @@
                 <!-- Total Income Card -->
                 <div class="bg-white rounded-card p-6 transition-all-ease shadow-card">
                     <p class="text-sm font-semibold text-income uppercase tracking-wider mb-2 flex items-center gap-2">
-                        <i class="fa-solid fa-arrow-trend-up"></i> รายรับรวม (เดือนนี้)
+                        <i class="fa-solid fa-arrow-trend-up"></i> รายรับรวม
                     </p>
                     <div class="flex items-end justify-between min-w-0">
                         <h2 class="text-3xl font-bold text-income tracking-tight truncate w-full" id="totalIncome">฿0.00</h2>
@@ -70,7 +70,7 @@
                 <!-- Total Expense Card -->
                 <div class="bg-white rounded-card p-6 transition-all-ease shadow-card">
                     <p class="text-sm font-semibold text-expense uppercase tracking-wider mb-2 flex items-center gap-2">
-                        <i class="fa-solid fa-arrow-trend-down"></i> รายจ่ายรวม (เดือนนี้)
+                        <i class="fa-solid fa-arrow-trend-down"></i> รายจ่ายรวม
                     </p>
                     <div class="flex items-end justify-between min-w-0">
                         <h2 class="text-3xl font-bold text-expense tracking-tight truncate w-full" id="totalExpense">฿0.00</h2>
@@ -111,7 +111,7 @@
                 
                 <div class="bg-house-green rounded-card p-8 text-white relative overflow-hidden flex flex-col justify-center min-h-[140px]">
                     <i class="fa-solid fa-vault absolute -right-6 -bottom-6 text-8xl opacity-20 transform -rotate-12"></i>
-                    <p class="text-sm font-medium opacity-90 mb-2 tracking-wide uppercase relative z-10">มูลค่าทรัพย์สินสุทธิ (ทุกกระเป๋า)</p>
+                    <p class="text-sm font-medium opacity-90 mb-2 tracking-wide uppercase relative z-10">มูลค่าทรัพย์สินสุทธิ</p>
                     <h2 class="text-3xl sm:text-4xl font-bold tracking-tight truncate w-full relative z-10" id="totalNetWorthWalletPage">฿0.00</h2>
                 </div>
 
@@ -242,7 +242,7 @@
                             <button type="button" onclick="toggleBreakdown('incomeBreakdownCard')" aria-expanded="true" aria-controls="incomeBreakdownWrap"
                                 class="no-press w-full text-left text-lg font-bold text-ink flex items-center gap-2 border-b border-hairline pb-3">
                                 <i class="fa-solid fa-arrow-trend-up text-income"></i>
-                                <span class="flex-1">สรุปรายรับตามหมวดหมู่</span>
+                                <span class="flex-1">สรุปรายรับ</span>
                                 <i class="chev fa-solid fa-chevron-down text-sm text-ink-soft"></i>
                             </button>
                             <div id="incomeBreakdownWrap" class="collapsible">
@@ -252,14 +252,14 @@
                                         <p class="text-sm">ยังไม่มีข้อมูลรายรับในเดือนนี้</p>
                                     </div>
                                 </div>
-                            </div>
+                            </div>  
                         </div>
                         <!-- Expense Breakdown -->
                         <div id="expenseBreakdownCard" data-collapsed="false" class="bg-white rounded-card p-6 shadow-card">
                             <button type="button" onclick="toggleBreakdown('expenseBreakdownCard')" aria-expanded="true" aria-controls="expenseBreakdownWrap"
                                 class="no-press w-full text-left text-lg font-bold text-ink flex items-center gap-2 border-b border-hairline pb-3">
                                 <i class="fa-solid fa-arrow-trend-down text-expense"></i>
-                                <span class="flex-1">สรุปรายจ่ายตามหมวดหมู่</span>
+                                <span class="flex-1">สรุปรายจ่าย</span>
                                 <i class="chev fa-solid fa-chevron-down text-sm text-ink-soft"></i>
                             </button>
                             <div id="expenseBreakdownWrap" class="collapsible">

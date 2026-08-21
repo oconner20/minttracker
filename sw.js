@@ -1,6 +1,6 @@
 // Service Worker สำหรับ MintTracker (PWA / offline)
 // เพิ่มเลขเวอร์ชันนี้ทุกครั้งที่แก้ไฟล์ asset เพื่อบังคับให้ผู้ใช้ได้ของใหม่
-const CACHE = 'minttracker-v20';
+const CACHE = 'minttracker-v21';
 
 // App shell + asset ทั้งหมด (ไม่พึ่ง CDN อีกต่อไป)
 const PRECACHE = [

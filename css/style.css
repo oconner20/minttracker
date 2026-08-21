@@ -121,3 +121,35 @@ input[type="number"] { -moz-appearance: textfield; }
 .no-press:active {
     transform: none;
 }
+
+/* ============================================================
+   ปิดการซูมเมื่อแตะสองครั้ง (double-tap zoom)
+   
+   หมายเหตุสำคัญ: iOS Safari "ไม่สนใจ" user-scalable=no ใน viewport meta
+   มาตั้งแต่ iOS 10 แล้ว (Apple ปิดไว้เพื่อการเข้าถึง) การใส่กลับไปจึงไม่ช่วยอะไร
+   
+   touch-action: manipulation คือวิธีที่ได้ผลจริง — ตัดเฉพาะ double-tap zoom
+   แต่ยังบีบนิ้วซูมได้ตามปกติ จึงไม่ปิดกั้นผู้ที่สายตาไม่ดี
+   ผลพลอยได้: ตัดดีเลย์ ~300ms ที่เบราว์เซอร์รอดูว่าจะแตะครั้งที่สองไหม
+   ทำให้ปุ่มตอบสนองไวขึ้น
+   ============================================================ */
+html,
+body,
+button,
+a,
+label,
+input,
+select,
+li,
+[onclick] {
+    touch-action: manipulation;
+}
+
+/* ลูกศรในการ์ดรายการ หมุนลงเมื่อกางแถบปุ่มแก้ไข/ลบ */
+.tx-chev {
+    transition: transform 200ms ease;
+}
+li[data-open="true"] .tx-chev {
+    transform: rotate(180deg);
+    opacity: 1;
+}

@@ -590,22 +590,20 @@ function updateValues() {
             const bgIconClass = t.type==='transfer' ? 'bg-gold-lightest ' : (isExp?'bg-cat-brick-bg ':'bg-green-light ');
 
             list.insertAdjacentHTML('beforeend', `
-                <li onclick="toggleTxActions(${t.id})" class="relative bg-white p-3.5 sm:p-4 rounded-card mb-3 cursor-pointer select-none shadow-card">
-                    <div class="flex justify-between items-start gap-2">
-                        <div class="flex items-start gap-3 flex-1 min-w-0">
-                            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-card ${bgIconClass} flex items-center justify-center flex-shrink-0 border border-white mt-0.5">${iconHtml}</div>
-                            <div class="flex flex-col min-w-0 flex-1">
-                                <p class="font-bold text-ink truncate text-sm sm:text-base leading-tight">${escapeHTML(t.text)}</p>
-                                <div class="flex flex-wrap items-center gap-1.5 text-[10px] sm:text-[11px] text-ink-soft mt-1.5">
-                                    <span class="flex items-center bg-ceramic px-2 py-0.5 rounded-xs min-w-0 max-w-full"><i class="fa-solid fa-wallet opacity-60 mr-1.5"></i>${wName}</span>
-                                    <span class="text-ink-soft">&bull;</span><span class="whitespace-nowrap">${formatDateDisplay(t.date)}</span>
-                                </div>
-                                ${dHtml}
+                <li onclick="toggleTxActions(${t.id})" data-open="false" class="relative bg-white p-4 rounded-card mb-3 cursor-pointer select-none shadow-card">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-card ${bgIconClass} flex items-center justify-center flex-shrink-0">${iconHtml}</div>
+                        <div class="flex flex-col min-w-0 flex-1">
+                            <p class="font-bold text-ink truncate text-base leading-snug">${escapeHTML(t.text)}</p>
+                            <div class="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-ink-soft mt-1">
+                                <span class="flex items-center bg-ceramic px-2 py-0.5 rounded-xs min-w-0 max-w-full"><i class="fa-solid fa-wallet opacity-60 mr-1.5"></i>${wName}</span>
+                                <span class="whitespace-nowrap">${formatDateDisplay(t.date)}</span>
                             </div>
+                            ${dHtml}
                         </div>
-                        <div class="flex flex-col items-end justify-start flex-shrink-0 ml-2">
-                            <span class="font-bold ${amountClass} whitespace-nowrap text-sm sm:text-lg tracking-tight">${amountStr}</span>
-                            <div class="p-4 -mt-2 -mr-4"><div class="p-2 w-8 h-8 flex items-center justify-center"><i class="fa-solid fa-ellipsis text-ink-soft text-base opacity-60 px-2"></i></div></div>
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <span class="font-bold ${amountClass} whitespace-nowrap text-lg sm:text-xl tracking-tight">${amountStr}</span>
+                            <i class="tx-chev fa-solid fa-chevron-down text-xs text-ink-soft opacity-50"></i>
                         </div>
                     </div>
                     
@@ -913,9 +911,17 @@ document.addEventListener('click', (e) => {
 });
 
 function toggleTxActions(id) {
-    document.querySelectorAll('.tx-actions-container').forEach(el => { if(el.id !== `tx-actions-${id}`) { el.classList.add('hidden'); el.classList.remove('flex'); } });
+    document.querySelectorAll('.tx-actions-container').forEach(el => {
+        if (el.id !== `tx-actions-${id}`) {
+            el.classList.add('hidden'); el.classList.remove('flex');
+            const li = el.closest('li'); if (li) li.dataset.open = 'false';
+        }
+    });
     const el = document.getElementById(`tx-actions-${id}`);
-    if (el.classList.contains('hidden')) { el.classList.remove('hidden'); el.classList.add('flex'); } else { el.classList.add('hidden'); el.classList.remove('flex'); }
+    const willOpen = el.classList.contains('hidden');
+    el.classList.toggle('hidden', !willOpen);
+    el.classList.toggle('flex', willOpen);
+    const li = el.closest('li'); if (li) li.dataset.open = willOpen ? 'true' : 'false';
 }
 
 function toggleWalletActions(id) {

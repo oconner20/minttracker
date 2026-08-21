@@ -597,9 +597,9 @@ function updateValues() {
                         <div class="w-12 h-12 rounded-card ${bgIconClass} flex items-center justify-center flex-shrink-0">${iconHtml}</div>
                         <div class="flex flex-col min-w-0 flex-1">
                             <p class="font-bold text-ink truncate text-base leading-snug">${escapeHTML(t.text)}</p>
-                            <div class="flex items-center gap-2 text-xs text-ink-soft mt-1 min-w-0">
-                                <span class="flex items-center bg-ceramic px-2 py-0.5 rounded-xs min-w-0 shrink"><i class="fa-solid fa-wallet opacity-60 mr-1.5 shrink-0"></i>${wName}</span>
-                                <span class="whitespace-nowrap shrink-0">${formatDateDisplay(t.date)}</span>
+                            <div class="flex flex-col items-start gap-1 text-xs text-ink-soft mt-1 min-w-0 w-full">
+                                <span class="whitespace-nowrap">${formatDateDisplay(t.date)}</span>
+                                <span class="flex items-center bg-ceramic px-2 py-0.5 rounded-xs min-w-0 max-w-full"><i class="fa-solid fa-wallet opacity-60 mr-1.5 shrink-0"></i>${wName}</span>
                             </div>
                             ${dHtml}
                         </div>
@@ -953,6 +953,23 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 
 form.addEventListener('submit', addTransaction);
 document.getElementById('importFileInput').addEventListener('change', handleImportFile);
+
+// --- ปิดการซูมทั้งหมด ---
+// touch-action: pan-x pan-y ใน css/style.css จัดการได้เกือบทุกกรณีแล้ว
+// แต่ iOS Safari ยังบีบนิ้วซูมทั้งหน้าได้ผ่าน gesture event จึงต้องดักเพิ่มตรงนี้
+['gesturestart', 'gesturechange', 'gestureend'].forEach(evt => {
+    document.addEventListener(evt, (e) => e.preventDefault(), { passive: false });
+});
+
+// กันการซูมด้วย Ctrl + ลูกกลิ้งเมาส์ / บีบนิ้วบนแทร็กแพด (ฝั่งเดสก์ท็อป)
+document.addEventListener('wheel', (e) => {
+    if (e.ctrlKey) e.preventDefault();
+}, { passive: false });
+
+// กันการซูมด้วยคีย์บอร์ด Ctrl + / - / 0
+document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && ['+', '-', '=', '0'].includes(e.key)) e.preventDefault();
+});
 
 function init() {
     document.getElementById('headerNickname').innerText = nickname; if(document.getElementById('displayNickname')) document.getElementById('displayNickname').innerText = nickname;

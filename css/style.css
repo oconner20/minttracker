@@ -123,18 +123,23 @@ input[type="number"] { -moz-appearance: textfield; }
 }
 
 /* ============================================================
-   ปิดการซูมเมื่อแตะสองครั้ง (double-tap zoom)
-   
-   หมายเหตุสำคัญ: iOS Safari "ไม่สนใจ" user-scalable=no ใน viewport meta
-   มาตั้งแต่ iOS 10 แล้ว (Apple ปิดไว้เพื่อการเข้าถึง) การใส่กลับไปจึงไม่ช่วยอะไร
-   
-   touch-action: manipulation คือวิธีที่ได้ผลจริง — ตัดเฉพาะ double-tap zoom
-   แต่ยังบีบนิ้วซูมได้ตามปกติ จึงไม่ปิดกั้นผู้ที่สายตาไม่ดี
-   ผลพลอยได้: ตัดดีเลย์ ~300ms ที่เบราว์เซอร์รอดูว่าจะแตะครั้งที่สองไหม
-   ทำให้ปุ่มตอบสนองไวขึ้น
+   ปิดการซูมทั้งหมด (ทั้งแตะสองครั้ง และบีบนิ้ว)
+
+   หมายเหตุ: iOS Safari ไม่สนใจ user-scalable=no ใน viewport meta
+   มาตั้งแต่ iOS 10 (แต่ยังมีผลบน Android และตอนติดตั้งเป็นแอป
+   จึงใส่ไว้ด้วยเพื่อครอบคลุมทุกกรณี)
+
+   ตัวที่ได้ผลจริงคือ touch-action: pan-x pan-y
+   - อนุญาตให้ "เลื่อนหน้าจอ" ได้ตามปกติ
+   - แต่ตัดทั้ง pinch-zoom และ double-tap zoom ออก
+   (ห้ามใช้ touch-action: none เพราะจะเลื่อนหน้าจอไม่ได้เลย)
+
+   ส่วน pinch บน iOS Safari ต้องดัก gesture event เพิ่มใน js/app.js ด้วย
    ============================================================ */
 html,
-body,
+body {
+    touch-action: pan-x pan-y;
+}
 button,
 a,
 label,
@@ -142,7 +147,7 @@ input,
 select,
 li,
 [onclick] {
-    touch-action: manipulation;
+    touch-action: pan-x pan-y;
 }
 
 /* ลูกศรในการ์ดรายการ หมุนลงเมื่อกางแถบปุ่มแก้ไข/ลบ */

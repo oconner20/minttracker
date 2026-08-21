@@ -1,15 +1,22 @@
+/* ============================================================
+   Base styles — Starbucks design system (light-only)
+   ตัด dark mode ออกทั้งหมดแล้ว ระบบนี้ใช้พื้นครีมอย่างเดียว
+   ============================================================ */
+
 body {
-    font-family: 'Sarabun', sans-serif;
+    font-family: 'Sarabun', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    /* tracking แน่น -0.16px คือเสียงของแบรนด์ ใช้แทบทุกพื้นผิว */
+    letter-spacing: -0.16px;
+    background-color: #f2f0eb; /* neutral-warm: ครีมอุ่น ไม่ใช่ขาวล้วน */
+    color: rgba(0, 0, 0, 0.87); /* ตัวอักษรไม่ใช่ดำสนิท ให้เข้ากับอุณหภูมิพื้นครีม */
     -webkit-tap-highlight-color: transparent;
 }
 
-/* Scrollbar customization */
+/* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-html.dark ::-webkit-scrollbar-thumb { background: #475569; }
-html.dark ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+::-webkit-scrollbar-thumb { background: #d6dbde; border-radius: 50px; }
+::-webkit-scrollbar-thumb:hover { background: #b9c0c5; }
 .custom-scrollbar::-webkit-scrollbar { width: 4px; }
 
 .transition-all-ease { transition: all 0.3s ease-in-out; }
@@ -22,38 +29,83 @@ html.dark ::-webkit-scrollbar-thumb:hover { background: #64748b; }
 }
 .animate-fade-in { animation: fadeIn 0.3s ease-out forwards; }
 
-/* Auto-resize input text hack for dark mode autofill */
-input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active{
-    -webkit-box-shadow: 0 0 0 30px white inset !important;
+/* ============================================================
+   Signature micro-interaction: ปุ่มยุบตัว scale(0.95) ตอนกด
+   นี่คือลายเซ็นของระบบ — ถ้าไม่มี ปุ่มจะรู้สึก "ไม่ใช่" ทันที
+   ============================================================ */
+button,
+.press {
+    transition: transform 0.2s ease, background-color 0.2s ease,
+                border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
-html.dark input:-webkit-autofill,
-html.dark input:-webkit-autofill:hover, 
-html.dark input:-webkit-autofill:focus, 
-html.dark input:-webkit-autofill:active{
-    -webkit-box-shadow: 0 0 0 30px #0f172a inset !important;
-    -webkit-text-fill-color: white !important;
+button:active,
+.press:active {
+    transform: scale(0.95);
+}
+/* ปุ่มลอย Frap: เงาเลเยอร์จางหายตอนกด ทำให้รู้สึกว่าถูกกดลงไปจริง */
+.frap:active {
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.24), 0 8px 12px rgba(0, 0, 0, 0);
 }
 
-/* Fix native date picker icon in dark mode */
-html.dark { color-scheme: dark; }
-html.dark input[type="date"]::-webkit-calendar-picker-indicator {
-    filter: invert(1) !important;
-    opacity: 0.8 !important;
+/* ============================================================
+   Form controls
+   ============================================================ */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #ffffff inset !important;
+    -webkit-text-fill-color: rgba(0, 0, 0, 0.87) !important;
 }
 
 /* iOS/Safari จัดข้อความใน input[type="date"] ไว้กึ่งกลางโดยปริยาย
    ทำให้ไม่ตรงแนวกับช่องกรอกอื่นที่ชิดซ้ายทั้งหมด
-   ::-webkit-date-and-time-value คือส่วนที่เก็บตัวข้อความวันที่บน WebKit
-   (บนเดสก์ท็อป Chrome ใช้ ::-webkit-datetime-edit จึงไม่กระทบของเดิม) */
+   ::-webkit-date-and-time-value คือส่วนที่เก็บตัวข้อความวันที่บน WebKit */
 input[type="date"]::-webkit-date-and-time-value {
     text-align: left;
 }
-/* เผื่อเบราว์เซอร์ที่อ่านค่าจาก input โดยตรง
-   หมายเหตุ: ตั้งใจไม่ใส่ -webkit-appearance: none เพราะไม่จำเป็นต่อการแก้ปัญหานี้
-   และอาจไปเปลี่ยนการวาดคอนโทรลปฏิทินของเบราว์เซอร์บนเดสก์ท็อป */
 input[type="date"] {
     text-align: left;
+}
+
+/* ซ่อนลูกศรเพิ่ม/ลดของ input ตัวเลข ให้ช่องกรอกเงินดูสะอาดแบบป้ายในร้าน */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] { -moz-appearance: textfield; }
+
+/* ============================================================
+   Expander / accordion — ตามสเปก expander-accordion ใน DESIGN.md
+   (300ms + cubic-bezier(0.25, 0.46, 0.45, 0.94) ease-out แบบวัดมาแล้ว)
+
+   ใช้เทคนิค grid-template-rows 1fr -> 0fr เพื่อให้ย่อ/ขยายได้ลื่น
+   โดยไม่ต้องรู้ความสูงของเนื้อหาล่วงหน้า (จำนวนหมวดหมู่เปลี่ยนได้ตลอด)
+   ============================================================ */
+.collapsible {
+    display: grid;
+    grid-template-rows: 1fr;
+    transition: grid-template-rows 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.collapsible > * {
+    overflow: hidden;
+    min-height: 0;
+}
+[data-collapsed="true"] .collapsible {
+    grid-template-rows: 0fr;
+}
+
+/* ลูกศรชี้ลงเมื่อกางอยู่ หมุนไปทางซ้ายเมื่อพับเก็บ */
+.chev {
+    transition: transform 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+[data-collapsed="true"] .chev {
+    transform: rotate(-90deg);
+}
+
+/* หัวข้อ accordion กินเต็มความกว้างการ์ด การย่อทั้งแถบตอนกดจะดูสะดุด
+   จึงยกเว้นจากการกด scale(0.95) ของระบบ */
+.no-press:active {
+    transform: none;
 }

@@ -1,0 +1,8 @@
+node_modules/
+package-lock.json
+*.bak
+.DS_Store
+Thumbs.db
+
+# การตั้งค่าเครื่องมือส่วนตัว (มี path และ session id ของเครื่อง ไม่ควรเผยแพร่)
+.claude/

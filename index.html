@@ -105,7 +105,6 @@
                         <h2 class="text-xl font-bold text-ink flex items-center gap-2 truncate">
                             <i class="fa-solid fa-wallet text-green-accent"></i> กระเป๋าเงินของคุณ
                         </h2>
-                        <p class="text-sm text-ink-soft mt-1">ยอดเงินคงเหลือตามบัญชีต่างๆ</p>
                     </div>
                 </div>
                 
@@ -331,7 +330,6 @@
                             </div>
                             <div>
                                 <p class="font-bold text-ink text-base">ตั้งงบประมาณรายจ่าย</p>
-                                <p class="text-xs text-ink-soft mt-0.5">กำหนดขีดจำกัดการใช้เงินในแต่ละเดือน</p>
                             </div>
                         </div>
                         <i class="fa-solid fa-chevron-right text-ink-soft group-hover:text-green-accent transition-transform group-hover:translate-x-1"></i>
@@ -352,30 +350,19 @@
                 <div class="bg-white rounded-card p-3 shadow-card">
                     <h3 class="text-xs font-bold text-ink-soft px-4 pt-3 pb-2 uppercase tracking-widest">สำรอง &amp; กู้คืนข้อมูล</h3>
 
-                    <button onclick="exportData()" class="w-full text-left p-4 hover:bg-ceramic rounded-pill transition-colors flex items-center justify-between group">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-full bg-green-light text-income flex items-center justify-center group-hover:bg-green-light transition-colors">
-                                <i class="fa-solid fa-cloud-arrow-down text-xl"></i>
-                            </div>
-                            <div>
-                                <p class="font-bold text-ink text-base">สำรองข้อมูล (Export)</p>
-                                <p id="backupStatusText" class="text-xs text-ink-soft mt-0.5">ดาวน์โหลดข้อมูลทั้งหมดเป็นไฟล์ .json</p>
-                            </div>
+                    <button onclick="exportData()" class="w-full text-left p-4 bg-green-light hover:brightness-95 active:brightness-90 rounded-pill transition-all flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-white text-income flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-cloud-arrow-down text-xl"></i>
                         </div>
-                        <i class="fa-solid fa-chevron-right text-ink-soft group-hover:text-income transition-transform group-hover:translate-x-1"></i>
+                        <p class="font-bold text-ink text-base">สำรองข้อมูล</p>
                     </button>
 
-                    <button onclick="importData()" class="w-full text-left p-4 hover:bg-ceramic rounded-pill transition-colors flex items-center justify-between group">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-full bg-cat-denim-bg text-transfer flex items-center justify-center group-hover:bg-cat-denim-bg transition-colors">
-                                <i class="fa-solid fa-cloud-arrow-up text-xl"></i>
-                            </div>
-                            <div>
-                                <p class="font-bold text-ink text-base">กู้คืนข้อมูล (Import)</p>
-                                <p class="text-xs text-ink-soft mt-0.5">นำเข้าไฟล์สำรองเพื่อแทนที่ข้อมูลปัจจุบัน</p>
-                            </div>
+                    <!-- bg-gold-lightest จับคู่กับ text-transfer ตามธีมสีของ "โอน/gold" ที่ใช้ทั่วทั้งแอป -->
+                    <button onclick="importData()" class="w-full text-left p-4 bg-gold-lightest hover:brightness-95 active:brightness-90 rounded-pill transition-all flex items-center gap-4 mt-2">
+                        <div class="w-12 h-12 rounded-full bg-white text-transfer flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-cloud-arrow-up text-xl"></i>
                         </div>
-                        <i class="fa-solid fa-chevron-right text-ink-soft group-hover:text-transfer transition-transform group-hover:translate-x-1"></i>
+                        <p class="font-bold text-ink text-base">กู้คืนข้อมูล</p>
                     </button>
 
                     <!-- ช่องเลือกไฟล์ที่ซ่อนไว้ สำหรับปุ่มกู้คืนข้อมูล -->
@@ -391,7 +378,6 @@
                             </div>
                             <div>
                                 <p class="font-bold text-expense text-base">ล้างข้อมูลทั้งหมด</p>
-                                <p class="text-xs text-expense mt-0.5">รีเซ็ตแอปเป็นค่าเริ่มต้น (กู้คืนไม่ได้)</p>
                             </div>
                         </div>
                         <i class="fa-solid fa-chevron-right text-ink-soft group-hover:text-expense transition-transform group-hover:translate-x-1"></i>

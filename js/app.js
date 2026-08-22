@@ -309,16 +309,12 @@ function renderWalletsAndTotals() {
         // View in Tab 2
         document.getElementById('walletList').insertAdjacentHTML('beforeend', `
             <div class="bg-white rounded-card p-5 relative overflow-hidden transition-colors shadow-card">
-                <div class="absolute top-0 right-0 w-20 h-20 bg-green-light rounded-bl-full opacity-20"></div>
                 <div class="flex items-center gap-3 mb-4 relative z-10 min-w-0">
                     <div class="w-10 h-10 rounded-full bg-ceramic flex items-center justify-center text-green-accent shrink-0"><i class="fa-solid fa-wallet"></i></div>
                     <h3 class="font-bold text-ink text-lg truncate w-full" title="${safeName}">${safeName}</h3>
                 </div>
-                <div class="relative z-10 flex justify-between items-end min-w-0">
-                    <div class="min-w-0 w-full">
-                        <p class="text-xs font-semibold text-ink-soft mb-1 uppercase tracking-wider">คงเหลือ</p>
-                        <p class="text-xl sm:text-2xl font-bold truncate w-full ${currentBalance < 0 ? 'text-expense ' : 'text-ink '}">${formatMoney(currentBalance)}</p>
-                    </div>
+                <div class="relative z-10 flex justify-center items-center min-w-0">
+                    <p class="text-xl sm:text-2xl font-bold truncate w-full text-center ${currentBalance < 0 ? 'text-expense ' : 'text-ink '}">${formatMoney(currentBalance)}</p>
                 </div>
             </div>`);
 
